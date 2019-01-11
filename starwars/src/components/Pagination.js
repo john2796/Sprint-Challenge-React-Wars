@@ -19,7 +19,7 @@ const Pagination = props => {
         className={classes.button}
         onClick={props.previousPage}
       >
-        PREVIOUS
+        GO TO PREVIOUS
       </Button>
       <Button
         disabled={!props.next ? true : null}
@@ -28,7 +28,7 @@ const Pagination = props => {
         color="primary"
         className={classes.button}
       >
-        NEXT
+        GO TO NEXT
       </Button>
     </div>
   );
