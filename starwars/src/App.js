@@ -103,10 +103,8 @@ class App extends Component {
           next={this.state.next}
           previous={this.state.previous}
         />
-        <Grid container spacing={16}>
-          <Grid container justify="center" spacing={16}>
-            <StarWarLists starwarsChars={starwarsChars} />
-          </Grid>
+        <Grid container justify="center" spacing={16}>
+          <StarWarLists starwarsChars={starwarsChars} />
         </Grid>
       </div>
     );
