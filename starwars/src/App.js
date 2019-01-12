@@ -2,16 +2,15 @@ import React, { Component } from "react";
 import "./App.css";
 import StarWarLists from "./components/StarWarLists";
 import Form from "./components/Form";
-import Fuse from "fuse.js";
 import Pagination from "./components/Pagination";
 import Grid from "@material-ui/core/Grid";
+import Fuse from "fuse.js";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       starwarsChars: [],
-      text: "",
       searchText: "",
       next: "",
       previous: ""
@@ -22,39 +21,30 @@ class App extends Component {
     this.getCharacters("https://swapi.co/api/people");
   }
   handleChange = e => {
-    this.setState(
-      {
-        [e.target.name]: e.target.value
-      },
-      () => this.searchTodos(this.state.searchText)
-    );
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    this.setState({
-      text: "",
-      searchText: ""
-    });
+    // this.setState({
+    //   searchData: [...this.state.starwarsChars, ],
+    //   searchText: ""
+    // });
   };
 
-  searchTodos = searchQuery => {
-    this.setState({
-      queriedTodos:
-        searchQuery === ""
-          ? this.state.starwarsChars
-          : new Fuse(
-              this.state.starwarsChars,
-              {
-                tokenize: true,
-                threshold: 0,
-                location: 0,
-                keys: ["task"]
-              },
-              searchQuery
-            ).search(searchQuery)
-    });
-  };
+  // searchTodos = querySearch => {
+  //   //alert(querySearch);
+  //   querySearch === ""
+  //     ? this.state.starwarsChars
+  //     : new Fuse(this.state.starwarsChars, {
+  //         tokenize: true,
+  //         threshold: 0,
+  //         location: 0,
+  //         keys: ["name"]
+  //       }).search(querySearch);
+  // };
 
   getCharacters = URL => {
     fetch(URL, {
@@ -87,6 +77,13 @@ class App extends Component {
 
   render() {
     const { starwarsChars, searchText } = this.state;
+    let filteredArr = starwarsChars.filter(item => {
+      return (
+        item.name
+          .toLowerCase()
+          .indexOf(this.state.searchText.toLocaleLowerCase()) !== -1
+      );
+    });
 
     return (
       <div className="App">
@@ -104,7 +101,7 @@ class App extends Component {
           previous={this.state.previous}
         />
         <Grid container justify="center" spacing={16}>
-          <StarWarLists starwarsChars={starwarsChars} />
+          <StarWarLists filteredArr={filteredArr} />
         </Grid>
       </div>
     );

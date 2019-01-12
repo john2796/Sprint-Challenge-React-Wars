@@ -1,8 +1,8 @@
 import React from "react";
 import StarWar from "./StarWar";
 
-const StarWarLists = ({ starwarsChars }) => {
-  return starwarsChars.map(char => (
+const StarWarLists = ({ filteredArr }) => {
+  return filteredArr.map(char => (
     <div
       key={char.created}
       style={{
